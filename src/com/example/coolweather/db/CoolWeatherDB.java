@@ -101,7 +101,7 @@ public class CoolWeatherDB {
 	}
 	
 	//´æ´¢countyÊý¾Ý
-	public void saveCity(County county)
+	public void saveCounty(County county)
 	{
 		if(county != null)
 		{
