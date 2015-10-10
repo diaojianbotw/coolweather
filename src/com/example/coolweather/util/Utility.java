@@ -9,7 +9,7 @@ import com.example.coolweather.model.Provice;
 
 public class Utility {
 
-	//解析和处理服务器返回的数据
+	//解析和处理服务器返回的数据 provice
 	public synchronized static boolean handleProvicesResponse(CoolWeatherDB coolWeatherDB,
 			String response){
 		if(!TextUtils.isEmpty(response))
@@ -31,7 +31,7 @@ public class Utility {
 		return false;
 	}
 	
-	//解析和处理服务器返回的数据
+	//解析和处理服务器返回的数据 city
 	public synchronized static boolean handleCitiesResponse(CoolWeatherDB coolWeatherDB,
 			String response,int proviceId){
 		if(!TextUtils.isEmpty(response))
@@ -54,7 +54,7 @@ public class Utility {
 		return false;
 	}
 	
-	//解析和处理服务器返回的数据
+	//解析和处理服务器返回的数据   county
 	public synchronized static boolean handleCountieResponse(CoolWeatherDB coolWeatherDB,
 			String response,int cityId){
 		if(!TextUtils.isEmpty(response))
