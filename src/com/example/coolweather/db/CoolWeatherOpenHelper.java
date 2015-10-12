@@ -13,23 +13,23 @@ public class CoolWeatherOpenHelper extends SQLiteOpenHelper{
 	private static final String CREATE_PROVICE ="create table Provice ("
 			+"id integer primary key autoincrement,"
 			+"provice_name text,"
-			+"provice_code text";
+			+"provice_code text)";
 	/**
 	 * City表建表语句
 	 */
 	private static final String CREATE_CITY ="create table City ("
 			+"id integer primary key autoincrement,"
 			+"city_name text,"
-			+"city_code text"
-			+"provice_id integer";
+			+"city_code text,"
+			+"provice_id integer)";
 	/**
 	 * County表建表语句
 	 */
 	private static final String CREATE_COUNTY ="create table County ("
 			+"id integer primary key autoincrement,"
 			+"county_name text,"
-			+"county_code text"
-			+"city_id integer";
+			+"county_code text,"
+			+"city_id integer)";
 	
 	public CoolWeatherOpenHelper(Context context, String name,
 			CursorFactory factory, int version) {

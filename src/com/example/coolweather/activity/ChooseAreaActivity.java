@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -71,10 +72,17 @@ public class ChooseAreaActivity extends Activity{
 					selectProvice = proviceList.get(position);
 					queryCity();
 				}
-				if(currentLevel == LEAVEL_CITY)
+				else if(currentLevel == LEAVEL_CITY)
 				{
 					selectCity = cityList.get(position);
 					queryCounty();
+				} else if(currentLevel == LEAVEL_COUNTY)
+				{
+					String countyCode = countyList.get(position).getCountyCode();
+					Intent intent = new Intent(ChooseAreaActivity.this,WeatherActivity.class);
+					intent.putExtra("county_code", countyCode);
+					startActivity(intent);
+					finish();
 				}
 			}
 			
@@ -117,6 +125,7 @@ public class ChooseAreaActivity extends Activity{
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
 			textView.setText(selectProvice.getProviceName());
+			currentLevel = LEAVEL_CITY;
 		}
 		else
 		{
@@ -138,6 +147,7 @@ public class ChooseAreaActivity extends Activity{
 			adapter.notifyDataSetChanged();
 			listView.setSelection(0);
 			textView.setText(selectCity.getCityName());
+			currentLevel = LEAVEL_COUNTY;
 		}
 		else
 		{
@@ -154,7 +164,7 @@ public class ChooseAreaActivity extends Activity{
 		}
 		else
 		{
-			address = "http://www.weather.com.cn/data/list3/cit.xml";
+			address = "http://www.weather.com.cn/data/list3/city.xml";
 		}
 		showProgressDialog();
 		HttpUtil.sendHttpRequest(address, new HttpCallbackListener(){
@@ -169,7 +179,7 @@ public class ChooseAreaActivity extends Activity{
 					result = Utility.handleCitiesResponse(coolWeatherDB, response, selectProvice.getId());
 				} else if("county".equals(type)){
 					result = Utility.handleCountieResponse(coolWeatherDB, response, selectCity.getId());
-				}
+				} 
 				if(result)
 				{
 					// 通过runOnUiThread()方法回到主线程处理逻辑

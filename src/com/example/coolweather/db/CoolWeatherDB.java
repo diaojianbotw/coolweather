@@ -46,7 +46,7 @@ public class CoolWeatherDB {
 			 ContentValues values = new ContentValues();
 			 values.put("provice_name", provice.getProviceName());
 			 values.put("provice_code", provice.getProviceCode());
-			 db.insert("Province", null, values);
+			 db.insert("Provice", null, values);
 		}
 	}
 	
@@ -61,7 +61,7 @@ public class CoolWeatherDB {
 				Provice provice = new Provice();
 				provice.setId(cursor.getInt(cursor.getColumnIndex("id")));
 				provice.setProviceName(cursor.getString(cursor.getColumnIndex("provice_name")));
-				provice.setProviceCode(cursor.getString(cursor.getColumnIndex("cursor")));
+				provice.setProviceCode(cursor.getString(cursor.getColumnIndex("provice_code")));
 				list.add(provice);
 			}while(cursor.moveToNext());
 		}
