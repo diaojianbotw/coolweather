@@ -1,6 +1,7 @@
 package com.example.coolweather.activity;
 
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,7 +29,8 @@ public class WeatherActivity extends Activity implements OnClickListener{
 	private TextView temp1Text;
 	private TextView temp2Text;
 	private TextView currentDateText;
-	
+	private Button switchCity;
+	private Button refresh;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,10 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		temp1Text = (TextView) findViewById(R.id.temp1);
 		temp2Text = (TextView) findViewById(R.id.temp2);
 		currentDateText = (TextView) findViewById(R.id.current_date);
+		switchCity = (Button) findViewById(R.id.switch_city);
+		refresh = (Button) findViewById(R.id.refresh_weather);
+		switchCity.setOnClickListener(this);
+		refresh.setOnClickListener(this);
 		String countyCode = getIntent().getStringExtra("county_code");
 		if(!TextUtils.isEmpty(countyCode))
 		{
@@ -104,7 +111,25 @@ public class WeatherActivity extends Activity implements OnClickListener{
 	}
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		switch(v.getId())
+		{
+			case R.id.switch_city:
+				Intent intent = new Intent(WeatherActivity.this,ChooseAreaActivity.class);
+				startActivity(intent);
+				finish();
+				break;
+			case R.id.refresh_weather:
+				publishText.setText("Í¬²½ÖÐ...."); 
+				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+				String weatherCode = prefs.getString("weather_code", "");
+				if(!TextUtils.isEmpty(weatherCode))
+				{
+					queryWeatherCodeInfo(weatherCode);
+				}
+				break;
+			default:
+				break;
+		}
 		
 	}
 	
